@@ -3,12 +3,22 @@ const int row2 = 4;
 const int column1 = 3;
 const int column2 = 2;
 
+const int numRows = 2;
+const int numColumns = 2;
+bool lights[numRows][numColumns];
+
 void setup()
 {
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+
+  // This is to make an L from the lights.
+  lights[0][0] = true;  
+  lights[0][1] = false;  
+  lights[1][0] = true;  
+  lights[1][1] = true;  
 }
 
 void showLight(int row, int column)
@@ -58,8 +68,13 @@ void showLight(int row, int column)
 
 void loop()
 {
-  showLight(1, 1);
-  showLight(2, 1);
-  showLight(2, 2);
+  for(int i=0;i<numRows;i++)
+  {
+    for(int j=0;j<numColumns;j++)
+    {
+      if(lights[i][j])
+        showLight(i+1, j+1);
+    }
+  }
 }
 
