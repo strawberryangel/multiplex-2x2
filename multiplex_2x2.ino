@@ -8,6 +8,7 @@ const int numColumns = 2;
 bool lights[numRows][numColumns];
 int rowPins[numRows];
 int columnPins[numRows];
+unsigned long lastTime = 0;
 
 void setup()
 {
@@ -77,6 +78,23 @@ void loop()
     {
       if(lights[i][j])
         showLight(i, j);
+    }
+  }
+  
+  // One time every second change the lights.
+  unsigned long now = millis() / 1000;
+  if(now!= lastTime)
+  {
+    lastTime = now;
+    for(int i=0;i<numRows;i++)
+    {
+      for(int j=0;j<numColumns;j++)
+      {
+        if(random(2))
+          lights[i][j] = false;
+        else
+          lights[i][j] = true;
+      }
     }
   }
 }
