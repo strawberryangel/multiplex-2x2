@@ -26,10 +26,14 @@ void showLight(int row, int column)
   //
   // All the other columns are on so no electricity goes from
   // the row to the column. 
+  
+  
+  // Now show the light.
+  // Turn everything else off first, then turn it on.
   if(row == 1)
   {
-    digitalWrite(row1, HIGH);
     digitalWrite(row2, LOW);
+    digitalWrite(row1, HIGH);
   }
   if(row == 2)
   {
@@ -38,25 +42,24 @@ void showLight(int row, int column)
   }
   if(column == 1)
   {
-    digitalWrite(column1, LOW);
     digitalWrite(column2, HIGH);
+    digitalWrite(column1, LOW);
   }
   if(column == 2)
   {
     digitalWrite(column1, HIGH);
     digitalWrite(column2, LOW);
   }
+  
+  // If there isn't some sort of rest time, then they all
+  // look like they're on but just a little.
+  delay(1);
 }
 
 void loop()
 {
   showLight(1, 1);
-  delay(1000);
-  showLight(1, 2);
-  delay(1000);
   showLight(2, 1);
-  delay(1000);
   showLight(2, 2);
-  delay(1000);
 }
 
