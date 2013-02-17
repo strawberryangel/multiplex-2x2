@@ -11,27 +11,52 @@ void setup()
   pinMode(5, OUTPUT);
 }
 
+void showLight(int row, int column)
+{
+  // Electricity goes from the row pin to all the LEDs on 
+  // that row, through a resistor, and then to the column
+  // pins. 
+  //
+  // So to show a light, the row has to be on and the 
+  // column has to be off. So the electricity goes from the 
+  // row pin as the source, through the LED and resistor and 
+  // then to the column pin as the sink. 
+  //
+  // All the other rows are off so they don't supply electricity.
+  //
+  // All the other columns are on so no electricity goes from
+  // the row to the column. 
+  if(row == 1)
+  {
+    digitalWrite(row1, HIGH);
+    digitalWrite(row2, LOW);
+  }
+  if(row == 2)
+  {
+    digitalWrite(row1, LOW);
+    digitalWrite(row2, HIGH);
+  }
+  if(column == 1)
+  {
+    digitalWrite(column1, LOW);
+    digitalWrite(column2, HIGH);
+  }
+  if(column == 2)
+  {
+    digitalWrite(column1, HIGH);
+    digitalWrite(column2, LOW);
+  }
+}
+
 void loop()
 {
-  digitalWrite(row1, HIGH);
-  digitalWrite(row2, LOW);
-  digitalWrite(column1, LOW);
-  digitalWrite(column2, HIGH);
+  showLight(1, 1);
   delay(1000);
-  digitalWrite(row1, HIGH);
-  digitalWrite(row2, LOW);
-  digitalWrite(column1, HIGH);
-  digitalWrite(column2, LOW);
+  showLight(1, 2);
   delay(1000);
-  digitalWrite(row1, LOW);
-  digitalWrite(row2, HIGH);
-  digitalWrite(column1, LOW);
-  digitalWrite(column2, HIGH);
+  showLight(2, 1);
   delay(1000);
-  digitalWrite(row1, LOW);
-  digitalWrite(row2, HIGH);
-  digitalWrite(column1, HIGH);
-  digitalWrite(column2, LOW);
+  showLight(2, 2);
   delay(1000);
 }
 
