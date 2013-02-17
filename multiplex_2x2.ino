@@ -6,6 +6,8 @@ const int column2 = 2;
 const int numRows = 2;
 const int numColumns = 2;
 bool lights[numRows][numColumns];
+int rowPins[numRows];
+int columnPins[numRows];
 
 void setup()
 {
@@ -13,6 +15,14 @@ void setup()
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
+  
+  // Go from row number to pin number
+  rowPins[0] = row1;
+  rowPins[1] = row2;
+  
+  // Go from column number to pin number
+  columnPins[0] = column1;
+  columnPins[1] = column2;
 
   // This is to make an L from the lights.
   lights[0][0] = true;  
@@ -21,6 +31,8 @@ void setup()
   lights[1][1] = true;  
 }
 
+// row and column are not like in math where the index number 
+// starts with 1, but they  start with 0.
 void showLight(int row, int column)
 {
   // Electricity goes from the row pin to all the LEDs on 
@@ -38,28 +50,19 @@ void showLight(int row, int column)
   // the row to the column. 
   
   
-  // Now show the light.
   // Turn everything else off first, then turn it on.
-  if(row == 1)
+  for(int r=0;r<numRows;r++)
   {
-    digitalWrite(row2, LOW);
-    digitalWrite(row1, HIGH);
+    digitalWrite(rowPins[r], LOW);
   }
-  if(row == 2)
+  for(int c=0;c<numColumns;c++)
   {
-    digitalWrite(row1, LOW);
-    digitalWrite(row2, HIGH);
+    digitalWrite(columnPins[c], HIGH);
   }
-  if(column == 1)
-  {
-    digitalWrite(column2, HIGH);
-    digitalWrite(column1, LOW);
-  }
-  if(column == 2)
-  {
-    digitalWrite(column1, HIGH);
-    digitalWrite(column2, LOW);
-  }
+  
+  // Now show the light.
+  digitalWrite(rowPins[row], HIGH);
+  digitalWrite(columnPins[column], LOW);
   
   // If there isn't some sort of rest time, then they all
   // look like they're on but just a little.
@@ -73,7 +76,7 @@ void loop()
     for(int j=0;j<numColumns;j++)
     {
       if(lights[i][j])
-        showLight(i+1, j+1);
+        showLight(i, j);
     }
   }
 }
