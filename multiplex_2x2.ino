@@ -75,17 +75,6 @@ void showLight(int row, int column)
   delayMicroseconds(100);
 }
 
-void showEveryOtherLight()
-{
-  for(int i=0;i<numRows;i++)
-  {
-    for(int j=0;j<numColumns;j++)
-    {
-      lights[i][j] = (i ^ j) % 2;
-    }
-  }
-}
-
 void showRandomLights()
 {
   for(int i=0;i<numRows;i++)
@@ -96,53 +85,6 @@ void showRandomLights()
         lights[i][j] = false;
       else
         lights[i][j] = true;
-    }
-  }
-}
-
-int showRow = 0;
-int showColumn = 0;
-void showEachLight()
-{
-  for(int i=0;i<numRows;i++)
-  {
-    for(int j=0;j<numColumns;j++)
-    {
-      lights[i][j] = false;
-    }
-  }
-  
-  lights[showRow][showColumn] = true;
-  showColumn++;
-  if(showColumn == numColumns)
-  {
-    showColumn = 0;
-    showRow++;
-  }
-  if(showRow == numRows)
-  {
-    showRow = 0;
-  }
-}
-
-void allLightsOn()
-{
-  for(int i=0;i<numRows;i++)
-  {
-    for(int j=0;j<numColumns;j++)
-    {
-      lights[i][j] = true;
-    }
-  }
-}
-
-void allLightsOff()
-{
-  for(int i=0;i<numRows;i++)
-  {
-    for(int j=0;j<numColumns;j++)
-    {
-      lights[i][j] = false;
     }
   }
 }
